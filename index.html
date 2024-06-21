@@ -14,7 +14,7 @@
             height: 40px;
             text-align: center;
             font-size: 20px;
-            border: 1px solid rgb(182, 16, 16);
+            border: 1px solid #cddcf3;
             position: relative;
         }
         .thick-border {
@@ -36,10 +36,16 @@
             top: 0;
             left: 0;
             box-sizing: border-box;
+            cursor: pointer;
         }
         input[type="text"]:focus {
             outline: none;
         }
+        input:hover{
+            background-color: #cddcf3;
+        }
+       
+
         #keyboard {
             display: grid;
             justify-content: center;
@@ -63,6 +69,7 @@
         }
         .key:hover {
             background-color: #d2dae7;
+            
         }
         #new-game-button {
             display: block;
@@ -72,7 +79,7 @@
             cursor: pointer;
         }
         .selected {
-            background-color: #d2dae7; /* Yellow background for selected cells */
+            background-color: #cddcf3;
         }
     </style>
 </head>
@@ -134,8 +141,10 @@
                         input.addEventListener('focus', () => {
                             if (selectedCell) {
                                 selectedCell.classList.remove('selected');
+                                
                             }
                             selectedCell = input;
+                            input.blur();
                             selectedCell.classList.add('selected');
                         });
                         cell.appendChild(input);
@@ -167,6 +176,7 @@
         });
 
         createSudokuTable();
+        
     </script>
 </body>
 </html>
