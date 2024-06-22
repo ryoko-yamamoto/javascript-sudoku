@@ -35,7 +35,7 @@ window.onload = function () {
   setGame();
 };
 
-function setGame() {
+const setGame = () => {
   //Digits 1-9
   for (let i = 1; i <= 9; i++) {
     //<div id="1"><div>
@@ -67,7 +67,7 @@ function setGame() {
       document.getElementById("board").append(tile);
     }
   }
-}
+};
 
 function selectNumber() {
   if (numSelected != null) {
@@ -101,14 +101,14 @@ function selectTile() {
   }
 }
 
-function startTimer() {
+const startTimer = () => {
   if (!timerStarted) {
     timerStarted = true;
     timerInterval = setInterval(updateTimer, 1000);
   }
-}
+};
 
-function updateTimer() {
+const updateTimer = () => {
   if (timeRemaining <= 0) {
     clearInterval(timerInterval);
     alert("Time's up!");
@@ -122,15 +122,15 @@ function updateTimer() {
   document.getElementById("timer").innerText = `${minutes}:${
     seconds < 10 ? "0" : ""
   }${seconds}`;
-}
+};
 
-function gameOver() {
+const gameOver = () => {
   clearInterval(timerInterval);
   alert("Game Over! Too many errors.");
   disableBoard();
-}
+};
 
-function disableBoard() {
+const disableBoard = () => {
   let tiles = document.querySelectorAll(".tile");
   tiles.forEach((tile) => {
     tile.removeEventListener("click", selectTile);
@@ -139,4 +139,4 @@ function disableBoard() {
   numbers.forEach((number) => {
     number.removeEventListener("click", selectNumber);
   });
-}
+};
