@@ -34,7 +34,7 @@
             border-radius: 5px;
             gap: 10px;
             position: absolute;
-            top: 0;
+            top: 70%;
             left: 40%;
             
 
@@ -62,10 +62,13 @@
 
         #keyboard {
             display: grid;
-            justify-content: center;
+            justify-content: flex-end;
             margin-top: 20px;
             grid-template-columns: repeat(3, 50px);
             row-gap: 10px;
+            position: absolute;
+            top: 30%;
+            right: 25%;
            
         }
         .key {
@@ -81,8 +84,13 @@
             border-radius: 5px;
             color: #325aaf;
         }
-        .key:hover {
+        .key:hover,
+        #easy-button:hover,
+        #medium-button:hover,
+        #hard-button:hover
+         {
             background-color: #d2dae7;
+            cursor: pointer;
             
         }
         #new-game-button{
@@ -91,6 +99,9 @@
             padding: 10px 20px;
             font-size: 1rem;
             cursor: pointer;
+            position: relative;
+            top: -9rem;
+            right: -19.5rem;
         }
         .selected {
             background-color: #cddcf3;
@@ -105,10 +116,12 @@
                 border: none;
                 background-color: #cddcf3;
                 border-radius: 5px;
+                
         }
     </style>
 </head>
 <body>
+    <h1 class="sudoku-title" style="display: flex; justify-content: center;text-align: center;">Sudoku</h1>
     <table id="easy-table"></table>
 
     <div id="keyboard">
@@ -172,11 +185,7 @@
             ['', '', '', '', '', '', '', '', '']
         ];
 
-        
 
-        
-
-        
 
         let selectedCell = null;
 
