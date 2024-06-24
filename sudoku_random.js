@@ -1,35 +1,36 @@
 let numSelected = null;
 let tileSelected = null;
-let timerStarted = false;
+let timerStarted = false; //true: start, false:not start
 let timerInterval;
 let timeRemaining = 15 * 60; // 15 minutes in seconds
 
 let errors = 0;
 const maxErrors = 15; // Maximum number of allowed errors
 
+//initialized the number of board
 let board = [
-  //initialize board
-  "---------",
-  "---------",
-  "---------",
-  "---------",
-  "---------",
-  "---------",
-  "---------",
-  "---------",
-  "---------",
+  ["-", "-", "-", "-", "-", "-", "-", "-", "-"],
+  ["-", "-", "-", "-", "-", "-", "-", "-", "-"],
+  ["-", "-", "-", "-", "-", "-", "-", "-", "-"],
+  ["-", "-", "-", "-", "-", "-", "-", "-", "-"],
+  ["-", "-", "-", "-", "-", "-", "-", "-", "-"],
+  ["-", "-", "-", "-", "-", "-", "-", "-", "-"],
+  ["-", "-", "-", "-", "-", "-", "-", "-", "-"],
+  ["-", "-", "-", "-", "-", "-", "-", "-", "-"],
+  ["-", "-", "-", "-", "-", "-", "-", "-", "-"],
 ];
+
+//initialize the answer
 let solution = [
-  //initialize answer
-  "---------",
-  "---------",
-  "---------",
-  "---------",
-  "---------",
-  "---------",
-  "---------",
-  "---------",
-  "---------",
+  ["-", "-", "-", "-", "-", "-", "-", "-", "-"],
+  ["-", "-", "-", "-", "-", "-", "-", "-", "-"],
+  ["-", "-", "-", "-", "-", "-", "-", "-", "-"],
+  ["-", "-", "-", "-", "-", "-", "-", "-", "-"],
+  ["-", "-", "-", "-", "-", "-", "-", "-", "-"],
+  ["-", "-", "-", "-", "-", "-", "-", "-", "-"],
+  ["-", "-", "-", "-", "-", "-", "-", "-", "-"],
+  ["-", "-", "-", "-", "-", "-", "-", "-", "-"],
+  ["-", "-", "-", "-", "-", "-", "-", "-", "-"],
 ];
 
 window.onload = function () {
@@ -40,13 +41,15 @@ window.onload = function () {
 function shuffle(array) {
   //Fisher-Yates shuffle algorithm
   for (let i = array.length - 1; i > 0; i--) {
-    const j = Math.floor(Math.random() * (i + 1));
+    //row 0-8
+    const j = Math.floor(Math.random() * (i + 1)); //column 0-8
     [array[i], array[j]] = [array[j], array[i]];
   }
   return array;
 }
 
 function isValid(board, row, col, num) {
+  //validate we can put the number on the cell
   for (let x = 0; x < 9; x++) {
     // row
     if (board[row][x] == num) return false; //cannot put the number
@@ -56,7 +59,7 @@ function isValid(board, row, col, num) {
     if (board[x][col] == num) return false; //cannot put the number
   }
   let startRow = row - (row % 3),
-    startCol = col - (col % 3);
+    startCol = col - (col % 3); //3*3 box
   for (let i = 0; i < 3; i++) {
     for (let j = 0; j < 3; j++) {
       if (board[i + startRow][j + startCol] == num) return false;
@@ -68,11 +71,14 @@ function isValid(board, row, col, num) {
 function fillBoard(board) {
   let numbers = shuffle([1, 2, 3, 4, 5, 6, 7, 8, 9]);
   for (let i = 0; i < 9; i++) {
+    //row
     for (let j = 0; j < 9; j++) {
+      //column
       if (board[i][j] == "-") {
+        // check if the cell is empty
         for (let num of numbers) {
           if (isValid(board, i, j, num)) {
-            board[i][j] = num;
+            board[i][j] = num; //put the number
             if (fillBoard(board)) return true;
             board[i][j] = "-"; //if we cannot put the number, we need turn the tile to empty
           }
@@ -86,8 +92,9 @@ function fillBoard(board) {
 
 function removeDigits(board, numToRemove) {
   while (numToRemove > 0) {
-    let i = Math.floor(Math.random() * 9);
-    let j = Math.floor(Math.random() * 9);
+    //loop until the number of  remove turns zero
+    let i = Math.floor(Math.random() * 9); //row 0-8
+    let j = Math.floor(Math.random() * 9); //column 0-8
     //choose the tile randomly
     if (board[i][j] != "-") {
       //if the cell is not empty
@@ -98,10 +105,6 @@ function removeDigits(board, numToRemove) {
 }
 
 function setGame() {
-  // 文字列の配列を2次元配列に変換
-  solution = solution.map((row) => row.split(""));
-  board = board.map((row) => row.split(""));
-
   fillBoard(solution);
   board = JSON.parse(JSON.stringify(solution));
   removeDigits(board, 50); //in this case, remove 50 tiles
@@ -151,7 +154,7 @@ function setGame() {
 function selectNumber() {
   if (numSelected != null) {
     //when select number
-    numSelected.classList.remove("number-selected");
+    numSelected.classList.remove("number-selected"); //if the cell is already chosen, initialize (remove information)
   }
   numSelected = this; //the number clicked just now
   numSelected.classList.add("number-selected");
@@ -161,12 +164,13 @@ function selectNumber() {
 function selectTile() {
   if (numSelected) {
     if (this.innerText != "") {
-      return;
+      //the cell has already number
+      return; //finish
     }
 
-    let coords = this.id.split("-");
-    let r = parseInt(coords[0]); //first
-    let c = parseInt(coords[1]); //second
+    let coords = this.id.split("-"); //0-0, 1-0, 2-3 0,0 1,0 2,3
+    let r = parseInt(coords[0]); //first value
+    let c = parseInt(coords[1]); //second value
     if (solution[r][c] == numSelected.id) {
       this.innerText = numSelected.id; //we can put the number
     } else {
@@ -194,11 +198,11 @@ function updateTimer() {
     disableBoard();
     return;
   }
-  timeRemaining--;
+  timeRemaining--; //reduce the time every 1 second
   let minutes = Math.floor(timeRemaining / 60);
   let seconds = timeRemaining % 60;
   document.getElementById("timer").innerText = `${minutes}:${
-    seconds < 10 ? "0" : ""
+    seconds < 10 ? "0" : "" //insert zero before seconds ex 01 02
   }${seconds}`;
 }
 
@@ -221,26 +225,26 @@ function disableBoard() {
 
 function newGame() {
   board = [
-    "---------",
-    "---------",
-    "---------",
-    "---------",
-    "---------",
-    "---------",
-    "---------",
-    "---------",
-    "---------",
+    ["-", "-", "-", "-", "-", "-", "-", "-", "-"],
+    ["-", "-", "-", "-", "-", "-", "-", "-", "-"],
+    ["-", "-", "-", "-", "-", "-", "-", "-", "-"],
+    ["-", "-", "-", "-", "-", "-", "-", "-", "-"],
+    ["-", "-", "-", "-", "-", "-", "-", "-", "-"],
+    ["-", "-", "-", "-", "-", "-", "-", "-", "-"],
+    ["-", "-", "-", "-", "-", "-", "-", "-", "-"],
+    ["-", "-", "-", "-", "-", "-", "-", "-", "-"],
+    ["-", "-", "-", "-", "-", "-", "-", "-", "-"],
   ];
   solution = [
-    "---------",
-    "---------",
-    "---------",
-    "---------",
-    "---------",
-    "---------",
-    "---------",
-    "---------",
-    "---------",
+    ["-", "-", "-", "-", "-", "-", "-", "-", "-"],
+    ["-", "-", "-", "-", "-", "-", "-", "-", "-"],
+    ["-", "-", "-", "-", "-", "-", "-", "-", "-"],
+    ["-", "-", "-", "-", "-", "-", "-", "-", "-"],
+    ["-", "-", "-", "-", "-", "-", "-", "-", "-"],
+    ["-", "-", "-", "-", "-", "-", "-", "-", "-"],
+    ["-", "-", "-", "-", "-", "-", "-", "-", "-"],
+    ["-", "-", "-", "-", "-", "-", "-", "-", "-"],
+    ["-", "-", "-", "-", "-", "-", "-", "-", "-"],
   ];
   setGame();
 }
