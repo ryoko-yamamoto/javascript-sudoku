@@ -34,7 +34,6 @@
   const level = 35;
   const getArray = (arr) => {
     let count = 0;
-
     while (count < level) {
       // getting random row and col number
       let ranRow = getRandom(0, 8);
@@ -48,7 +47,7 @@
       }
 
       // Check if newNumber already exists in the row, column, or 3x3 subgrid
-      let duplicate = false; // CHANGED
+      let duplicate = false;
 
       // Check the row
       for (let i = 0; i < 9; i++) {
