@@ -6,14 +6,31 @@ hr {
   width: 500px;
 }
 
-#errors {
+#error-erea {
+  display: flex;
+  justify-content: center;
   color: red;
+  font-size: 24px;
+  font-weight: bold;
+  align-items: center;
+  padding: 0;
+  margin: 0;
+}
+
+#error-erea p {
+  margin: 5px 5px;
+  padding: 0;
+}
+
+#timer {
+  margin: 10px 0;
+  padding: 0;
 }
 
 #board {
   width: 450px;
   height: 450px;
-  margin: 0 auto;
+  /* margin: 0 auto; */
   display: flex;
   flex-wrap: wrap;
 }
@@ -31,11 +48,11 @@ hr {
   align-items: center;
 }
 #digits {
-  width: 450px;
-  height: 50px;
-  margin: 0 auto;
-  display: flex;
-  flex-wrap: wrap;
+  width: 150px;
+  height: 150px;
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  grid-template-rows: repeat(3, 1fr);
 }
 
 .number {
@@ -53,7 +70,7 @@ hr {
 }
 
 .number-selected {
-  background-color: gray;
+  background-color: aqua;
 }
 
 .tile-start {
@@ -66,4 +83,57 @@ hr {
 
 .vertical-line {
   border-right: 1px solid black;
+}
+.top-line {
+  border-top: 1px solid black;
+}
+.bottom-line {
+  border-bottom: 1px solid black;
+}
+.left-line {
+  border-left: 1px solid black;
+}
+.right-line {
+  border-right: 1px solid black;
+}
+
+button {
+  font-size: 16px;
+  margin-bottom: 8px;
+  padding: 5px 10px;
+}
+
+button:hover {
+  background-color: aqua;
+}
+
+#game-area {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin: 0 auto;
+  gap: 40px;
+  max-width: 800px;
+}
+
+button.selected {
+  background-color: aqua;
+}
+
+#difficulty {
+  display: flex;
+  gap: 20px;
+  justify-content: center;
+  align-items: center;
+}
+
+#difficulty p {
+  font-size: 20px;
+  margin: 0;
+}
+
+#right-side {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
 }

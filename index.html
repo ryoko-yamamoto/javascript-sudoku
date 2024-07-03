@@ -9,14 +9,28 @@
   <body>
     <h1>Sudoku</h1>
     <hr />
-    <h2 id="errors">0</h2>
     <h2 id="timer">15:00</h2>
-    <!-- Added timer display -->
+    <div id="error-erea">
+      <p>Error:</p>
+      <p id="errors">0</p>
+      <p>/ 30</p>
+    </div>
+    <div id="difficulty">
+      <p>Level:</p>
+      <button id="easy">Easy</button>
+      <button id="medium">Medium</button>
+      <button id="hard">Hard</button>
+    </div>
 
-    <!-- 9*9 -->
-    <div id="board"></div>
-    <br />
-    <div id="digits"></div>
+    <div id="game-area">
+      <div id="board"></div>
+      <div id="right-side">
+        <div id="digits"></div>
+        <div id="new-game">
+          <button id="new-game-button">New Game</button>
+        </div>
+      </div>
+    </div>
 
     <script src="sudoku.js"></script>
   </body>

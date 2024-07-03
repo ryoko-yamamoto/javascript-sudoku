@@ -2,9 +2,7 @@
 
 ## Overview
 
-## Reference URLs
-
-Bootstrap: [https://getbootstrap.com/]
+This project is a Sudoku game implemented in JavaScript, HTML and CSS. It generates a Sudoku puzzle, validates user input, and checks for completion. The game includes functionality for different difficulty levels, a timer, and an error counter to enhance the gaming experience.
 
 ## Author
 
