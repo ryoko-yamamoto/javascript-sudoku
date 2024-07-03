@@ -2,10 +2,8 @@
 
 ## Overview
 
-## Reference URLs
-
-![スクリーンショット 2024-07-02 190515](https://github.com/ryoko-yamamoto/javascript-sudoku/assets/160983080/491aa764-a8e4-425e-8a92-2dcbc044be71)
-
+This project is a Sudoku game implemented in JavaScript, HTML and CSS. It generates a Sudoku puzzle, validates user input, and checks for completion. The game includes functionality for different difficulty levels, a timer, and an error counter to enhance the gaming experience.
+![alt text](sudoku.png)
 
 ## Author
 

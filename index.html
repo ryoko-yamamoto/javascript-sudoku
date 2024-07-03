@@ -1,42 +1,37 @@
 <!DOCTYPE html>
-<html lang="es">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Sudoku</title>
-    <link rel="stylesheet" href="styles.css">
-</head>
-<body>
-    <h1 class="sudoku-title" style="display: flex; justify-content: center;text-align: center;">Sudoku</h1>
-    <table id="easy-table"></table>
-
-    <div id="keyboard">
-        <div class="key" data-value="1">1</div>
-        <div class="key" data-value="2">2</div>
-        <div class="key" data-value="3">3</div>
-        <div class="key" data-value="4">4</div>
-        <div class="key" data-value="5">5</div>
-        <div class="key" data-value="6">6</div>
-        <div class="key" data-value="7">7</div>
-        <div class="key" data-value="8">8</div>
-        <div class="key" data-value="9">9</div>
+    <link rel="stylesheet" href="styles.css" />
+  </head>
+  <body>
+    <h1>Sudoku</h1>
+    <hr />
+    <h2 id="timer">15:00</h2>
+    <div id="error-erea">
+      <p>Error:</p>
+      <p id="errors">0</p>
+      <p>/ 30</p>
+    </div>
+    <div id="difficulty">
+      <p>Level:</p>
+      <button id="easy">Easy</button>
+      <button id="medium">Medium</button>
+      <button id="hard">Hard</button>
     </div>
 
-    <button id="new-game-button">New Game</button>
-
-    <div class="buttons">
-        <p class="information">Difficulty:</p>
-        <button id="easy-button">Easy</button>
-        <button id="medium-button">Medium</button>
-        <button id="hard-button">Hard</button>
-        <br><br>
-        <!-- <button id="solve-button">Solve</button> -->
-        <!-- <button id="hint-button">Hint</button> -->
+    <div id="game-area">
+      <div id="board"></div>
+      <div id="right-side">
+        <div id="digits"></div>
+        <div id="new-game">
+          <button id="new-game-button">New Game</button>
+        </div>
+      </div>
     </div>
 
-    <script>
-
-    </script>
     <script src="sudoku.js"></script>
-</body>
+  </body>
 </html>
