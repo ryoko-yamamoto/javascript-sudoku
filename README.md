@@ -4,7 +4,8 @@
 
 ## Reference URLs
 
-Bootstrap: [https://getbootstrap.com/]
+![スクリーンショット 2024-07-02 190515](https://github.com/ryoko-yamamoto/javascript-sudoku/assets/160983080/491aa764-a8e4-425e-8a92-2dcbc044be71)
+
 
 ## Author
 
