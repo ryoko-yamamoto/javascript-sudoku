@@ -5,7 +5,7 @@ let timerInterval;
 let timeRemaining = 15 * 60; // 15 minutes
 let errors = 0;
 const maxErrors = 30; // Maximum number of allowed errors
-let difficulty = 50; //midium
+let difficulty = 40; //midium
 let selectedButton = document.getElementById("medium");
 
 const firstArr = [
@@ -120,6 +120,15 @@ const setGame = () => {
     document.getElementById("digits").appendChild(number);
   }
 
+  const eraseBtn = () => {
+    const btn = document.createElement("div");
+    btn.id = "";
+    btn.innerText = "Del";
+    btn.addEventListener("click", selectNumber); //when click, call selectNumber()
+    btn.classList.add("number");
+    document.getElementById("digits").appendChild(btn);
+  };
+  eraseBtn();
   //make box(9*9)
   for (let r = 0; r < 9; r++) {
     for (let c = 0; c < 9; c++) {
@@ -212,16 +221,56 @@ const selectNumber = (event) => {
   startTimer();
 };
 
+// const selectTile = (event) => {
+//   if (numSelected != null) {
+//     // if (event.target.innerText != "") {
+//     //   //if the cellhas already number
+//     //   return; //finish the function
+//     // }
+
+//     const tileStart = event.target.classList[0];
+//     if (tileStart == "tile-start") return;
+
+//     let coords = event.target.id.split("-");
+//     let r = parseInt(coords[0]);
+//     let c = parseInt(coords[1]);
+
+//     if (isValid(board, r, c, numSelected.id)) {
+//       event.target.innerText = numSelected.id;
+//       board[r][c] = numSelected.id == " " ? "-" : numSelected.id;
+//       if (checkWin()) {
+//         clearInterval(timerInterval);
+//         alert("Congratulations!!");
+//         disableBoard();
+//       }
+//     } else {
+//       //if failed
+//       errors += 1;
+//       document.getElementById("errors").innerText = errors;
+//       if (errors >= maxErrors) {
+//         gameOver();
+//       }
+//     }
+//     startTimer();
+//   }
+// };
+
 const selectTile = (event) => {
   if (numSelected != null) {
-    if (event.target.innerText != "") {
-      //if the cellhas already number
-      return; //finish the function
-    }
+    const tileStart = event.target.classList[0];
+    if (tileStart == "tile-start") return;
+
     let coords = event.target.id.split("-");
     let r = parseInt(coords[0]);
     let c = parseInt(coords[1]);
-    if (solution[r][c] == numSelected.id) {
+
+    if (numSelected.id === "") {
+      // 'Del' button is selected
+      if (event.target.innerText !== "") {
+        event.target.innerText = "";
+        board[r][c] = "-";
+      }
+    } else if (isValid(board, r, c, numSelected.id)) {
       event.target.innerText = numSelected.id;
       board[r][c] = numSelected.id;
       if (checkWin()) {
@@ -230,7 +279,6 @@ const selectTile = (event) => {
         disableBoard();
       }
     } else {
-      //if failed
       errors += 1;
       document.getElementById("errors").innerText = errors;
       if (errors >= maxErrors) {
@@ -280,10 +328,10 @@ setGame(); //reset game
 document.getElementById("new-game-button").addEventListener("click", newGame);
 document
   .getElementById("easy")
-  .addEventListener("click", (event) => setDifficulty(40, event.target));
+  .addEventListener("click", (event) => setDifficulty(30, event.target));
 document
   .getElementById("medium")
-  .addEventListener("click", (event) => setDifficulty(50, event.target));
+  .addEventListener("click", (event) => setDifficulty(40, event.target));
 document
   .getElementById("hard")
-  .addEventListener("click", (event) => setDifficulty(60, event.target));
+  .addEventListener("click", (event) => setDifficulty(50, event.target));

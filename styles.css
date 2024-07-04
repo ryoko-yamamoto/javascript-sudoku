@@ -28,11 +28,13 @@ hr {
 }
 
 #board {
-  width: 450px;
+  /* width: 450px;
   height: 450px;
-  /* margin: 0 auto; */
   display: flex;
-  flex-wrap: wrap;
+  flex-wrap: wrap; */
+  display: grid;
+  grid-template-columns: repeat(9, 1fr);
+  grid-template-rows: repeat(9, 1fr);
 }
 
 .tile {
@@ -135,5 +137,5 @@ button.selected {
 #right-side {
   display: flex;
   flex-direction: column;
-  gap: 20px;
+  gap: 70px;
 }
